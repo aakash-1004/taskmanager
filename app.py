@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify
+from prometheus_flask_exporter import PrometheusMetrics
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
 app = Flask(__name__)
-
+metrics = PrometheusMetrics(app)
 # Config from environment variables with defaults
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://admin:password@localhost:27017/")
 DB_NAME = os.getenv("DB_NAME", "taskmanager")
